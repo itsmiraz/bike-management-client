@@ -14,23 +14,39 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import logo from "@/assets/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch } from "@/redux/hooks/hooks";
+import { useRegisterMutation } from "@/redux/feature/auth/authApi";
+import { setUser } from "@/redux/feature/auth/authSlice";
+import { toast } from "sonner";
 
 const Register = () => {
-  // 1. Define your form.
+  const dispatch = useAppDispatch();
+  const [register] = useRegisterMutation();
+  const navigate = useNavigate();
+
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
+      name: "",
       email: "",
       password: "",
     },
   });
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof registerSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof registerSchema>) {
+    toast("Logining");
+
+    try {
+      const res = await register(values).unwrap();
+
+      dispatch(setUser({ user: res.data.user, token: res.data.accessToken }));
+      toast("Logged in SuccessFully");
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+      toast("Logged in Failded");
+    }
   }
   return (
     <>
