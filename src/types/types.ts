@@ -36,6 +36,7 @@ export type LoginFormFieldType = {
 };
 
 export type TBike = {
+  _id: string;
   name: string;
   price: number;
   quantity: number;

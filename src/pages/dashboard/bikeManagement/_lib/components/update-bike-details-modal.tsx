@@ -15,35 +15,50 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useAddNewBikeMutation } from "@/redux/feature/bike/bikeApi";
+import {
+  useAddNewBikeMutation,
+  useUpdateBikeMutation,
+} from "@/redux/feature/bike/bikeApi";
+import { TBike } from "@/types/types";
 import { addNewBikeSchema } from "@/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
-const AddnewBikeModal = ({ open, setOpen }) => {
-  const [addNewBike] = useAddNewBikeMutation();
+const UpdateBikeModal = ({
+  open,
+  setOpen,
+  defaultData,
+}: {
+  defaultData: TBike;
+}) => {
+  const [updateBike] = useUpdateBikeMutation();
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof addNewBikeSchema>>({
     resolver: zodResolver(addNewBikeSchema),
     defaultValues: {
-      name: "",
-      price: 0,
-      quantity: 0,
-      brand: "",
-      model: "",
-      type: "",
-      color: "",
-      releaseDate: "",
+      name: defaultData.name,
+      price: defaultData.price,
+      quantity: defaultData.quantity,
+      brand: defaultData.brand,
+      model: defaultData.model,
+      type: defaultData.type,
+      color: defaultData.color,
+      releaseDate: defaultData.releaseDate,
     },
   });
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof addNewBikeSchema>) {
     try {
-      await addNewBike(values);
+      const payload = {
+        id: defaultData._id,
+        data: values,
+      };
+
+      await updateBike(payload);
       setOpen(false);
-      toast("SuccessFully Added");
+      toast("SuccessFully Updated");
       form.reset();
     } catch (err) {
       console.log(err);
@@ -54,12 +69,12 @@ const AddnewBikeModal = ({ open, setOpen }) => {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button onClick={() => setOpen(true)} variant="outline">
-            Add New Bike
+            Update
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px] overflow-y-scroll max-h-full lg:max-h-[700px] ">
           <DialogHeader>
-            <DialogTitle>Add New Bike</DialogTitle>
+            <DialogTitle>Update Bike Details</DialogTitle>
           </DialogHeader>
           <div className="">
             <Form {...form}>
@@ -209,4 +224,4 @@ const AddnewBikeModal = ({ open, setOpen }) => {
   );
 };
 
-export default AddnewBikeModal;
+export default UpdateBikeModal;
