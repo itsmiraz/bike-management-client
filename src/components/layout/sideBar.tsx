@@ -13,7 +13,7 @@ const routes = [
     label: "Bike Management",
   },
   {
-    path: "/sales-mangement",
+    path: "/sales-management",
     label: "Sales Management",
   },
   {
