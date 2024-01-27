@@ -55,7 +55,7 @@ const BikeManagement = () => {
           </>
         ) : (
           <div className="space-y-4">
-            {data?.data?.map((bike: TBike, i: number) => (
+            {data?.data?.data?.map((bike: TBike, i: number) => (
               <BikeCard
                 SelectedBikes={SelectedBikes}
                 setSelectedBikes={setSelectedBikes}
