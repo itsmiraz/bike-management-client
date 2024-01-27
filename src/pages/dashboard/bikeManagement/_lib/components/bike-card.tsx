@@ -3,9 +3,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Ellipsis from "@/assets/icons/ellipsis";
@@ -18,17 +16,19 @@ const BikeCard = ({
   SelectedBikes,
 }: {
   data: TBike;
+  SelectedBikes: TBike[];
+  setSelectedBikes: React.Dispatch<React.SetStateAction<never[] | TBike[]>>;
 }) => {
   const [open, setopen] = useState(false);
 
-  const handleSelect = selectedBike => {
+  const handleSelect = (selectedBike: TBike) => {
     const isExits = SelectedBikes.find(bike => bike._id === selectedBike._id);
     // console.log(isExits);
     if (isExits) {
-      const isExits = SelectedBikes.filter(
+      const filteredBikes = SelectedBikes.filter(
         bike => bike._id !== selectedBike._id
       );
-      setSelectedBikes(isExits);
+      setSelectedBikes(filteredBikes);
     } else {
       setSelectedBikes([...SelectedBikes, selectedBike]);
     }
@@ -39,7 +39,7 @@ const BikeCard = ({
     <div className="flex base-normal justify-between border-b pb-4 ">
       <div className="flex justify-center items-center gap-x-4">
         <Checkbox onClick={() => handleSelect(data)} />
-        <p>{data.name}</p>
+        <p>{data?.name}</p>
       </div>
       <p>{data.quantity}</p>
       <p>{data.price} Tk</p>

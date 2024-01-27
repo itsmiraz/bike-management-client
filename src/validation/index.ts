@@ -5,12 +5,6 @@ const createStringSchema = (fieldName: string) =>
     required_error: `${fieldName} is required`,
   });
 
-const createNumberSchema = (fieldName: string) =>
-  z.number({
-    invalid_type_error: `${fieldName} must be a number`,
-    required_error: `${fieldName} is required`,
-  });
-
 export const loginShcema = z.object({
   email: z.string().min(2).max(50),
   password: z.string().min(2).max(50),

@@ -15,10 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  useAddNewBikeMutation,
-  useUpdateBikeMutation,
-} from "@/redux/feature/bike/bikeApi";
+import { useUpdateBikeMutation } from "@/redux/feature/bike/bikeApi";
 import { TBike } from "@/types/types";
 import { addNewBikeSchema } from "@/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -31,6 +28,8 @@ const UpdateBikeModal = ({
   defaultData,
 }: {
   defaultData: TBike;
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const [updateBike] = useUpdateBikeMutation();
 

@@ -12,7 +12,7 @@ import { toast } from "sonner";
 const BikeManagement = () => {
   const [open, setOpen] = useState(false);
   const { data, isLoading } = useGetBikesQuery(undefined);
-  const [SelectedBikes, setSelectedBikes] = useState([]);
+  const [SelectedBikes, setSelectedBikes] = useState<TBike[]>([]);
   const [deleteBike] = useDeleteBikeMutation();
 
   const handleDelete = async () => {
