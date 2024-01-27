@@ -35,4 +35,18 @@ export type LoginFormFieldType = {
   password?: string;
 };
 
+export type TBike = {
+  name: string;
+  price: number;
+  quantity: number;
+  brand: string;
+  model: string;
+  type: string;
+  color: string;
+  releaseDate: string;
+};
+
+export type TBikeInitState = {
+  bikes: TBike[] | null;
+};
 // export const ErrorType =
