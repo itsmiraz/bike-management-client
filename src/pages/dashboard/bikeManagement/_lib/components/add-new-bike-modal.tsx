@@ -21,7 +21,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
-const AddnewBikeModal = ({ open, setOpen }) => {
+const AddnewBikeModal = ({
+  open,
+  setOpen,
+}: {
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const [addNewBike] = useAddNewBikeMutation();
 
   // 1. Define your form.

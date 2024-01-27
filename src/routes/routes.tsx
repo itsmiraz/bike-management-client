@@ -3,7 +3,7 @@ import Login from "@/pages/auth/login";
 import Register from "@/pages/auth/register";
 import BikeManagement from "@/pages/dashboard/bikeManagement/bikeManagement";
 import SalesHistory from "@/pages/dashboard/salesHistory";
-import SalesManagement from "@/pages/dashboard/salesManagement";
+import SalesManagement from "@/pages/dashboard/salesManagement/salesManagement";
 import { createBrowserRouter } from "react-router-dom";
 
 export const router = createBrowserRouter([
