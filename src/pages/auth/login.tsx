@@ -14,7 +14,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import logo from "@/assets/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useLoginMutation } from "@/redux/feature/auth/authApi";
+import { toast } from "sonner";
+import { setUser } from "@/redux/feature/auth/authSlice";
+import { useAppDispatch } from "@/redux/hooks/hooks";
 
 const Login = () => {
   // 1. Define your form.
@@ -26,11 +30,23 @@ const Login = () => {
     },
   });
 
+  const [login] = useLoginMutation();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof loginShcema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof loginShcema>) {
+    toast("Logining");
+
+    try {
+      const res = await login(values).unwrap();
+
+      dispatch(setUser({ user: res.data.user, token: res.data.accessToken }));
+      toast("Logged in SuccessFully");
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+      toast("Logged in Failded");
+    }
   }
   return (
     <>
