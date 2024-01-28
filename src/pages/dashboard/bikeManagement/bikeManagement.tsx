@@ -31,6 +31,7 @@ import { getLastTenYears } from "@/libs/getLast10years";
 
 const BikeManagement = () => {
   const [open, setOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
   const [minPrice, setminPrice] = useState("");
   const [maxPrice, setmaxPrice] = useState("");
   const [releaseYear, setReleaseYear] = useState(""); // Changed to camelCase for consistency
@@ -41,6 +42,7 @@ const BikeManagement = () => {
   const [color, setcolor] = useState("");
 
   const { data, isLoading } = useGetBikesQuery({
+    searchTerm,
     color,
     minPrice,
     maxPrice,
@@ -89,6 +91,11 @@ const BikeManagement = () => {
 
       <div>
         <p className="mb-2 font-medium">Filter</p>
+        <Input
+          className="max-w-[400px] mb-4"
+          onChange={e => setSearchTerm(e.target.value)}
+          placeholder="Search by model,name,color etc"
+        />
         <div className="flex flex-wrap mb-4  gap-4">
           <div className="flex gap-4">
             <Popover>
