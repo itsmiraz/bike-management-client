@@ -21,8 +21,6 @@ const BikeManagement = () => {
     const selectedBikeIds = SelectedBikes.map(bike => bike?._id);
 
     try {
-      console.log(selectedBikeIds);
-
       const payload = {
         deletedIds: selectedBikeIds,
       };

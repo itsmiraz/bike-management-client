@@ -39,7 +39,7 @@ const BikeCard = ({
   };
 
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-6 base-normal justify-between border-b pb-4 ">
+    <div className="grid grid-cols-2 lg:grid-cols-6 base-normal items-center border-b pb-4 ">
       <div className="flex justify-start items-center gap-x-4">
         <Checkbox onClick={() => handleSelect(data)} />
         <p>{data?.name}</p>

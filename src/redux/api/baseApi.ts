@@ -10,7 +10,7 @@ import { RootState } from "../store";
 import { logOut, setUser } from "../feature/auth/authSlice";
 // https://bike-management-server-six.vercel.app
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:5000/api",
+  baseUrl: "https://bike-management-server-six.vercel.app/api",
   credentials: "include",
 
   prepareHeaders: (headers, { getState }) => {
