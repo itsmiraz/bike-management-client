@@ -154,6 +154,28 @@ const UpdateBikeModal = ({
                 />
                 <FormField
                   control={form.control}
+                  name="size"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Size (Engine CC)</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="number"
+                          min={0}
+                          placeholder="0"
+                          {...field}
+                          onChange={event =>
+                            field.onChange(+event.target.value)
+                          }
+                        />
+                      </FormControl>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
                   name="brand"
                   render={({ field }) => (
                     <FormItem>

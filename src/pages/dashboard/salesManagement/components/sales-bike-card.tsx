@@ -1,6 +1,7 @@
 import { TBike } from "@/types/types";
 import { useState } from "react";
 import SellBikeModal from "./sell-bike-modal";
+import { Button } from "@/components/ui/button";
 
 const SalesBikeCard = ({ data, i }: { data: TBike; i: number }) => {
   const [open, setOpen] = useState(false);
@@ -16,8 +17,9 @@ const SalesBikeCard = ({ data, i }: { data: TBike; i: number }) => {
       <p>{data.price} Tk</p>
       <p>{data.type} </p>
       <p>{data.color} </p>
-      <div>
+      <div className="flex gap-x-4">
         <SellBikeModal bikeDetails={data} open={open} setOpen={setOpen} />
+        <Button>Details</Button>
       </div>
     </div>
   );

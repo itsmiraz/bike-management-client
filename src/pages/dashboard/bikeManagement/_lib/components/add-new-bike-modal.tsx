@@ -49,7 +49,7 @@ const AddnewBikeModal = ({
       brand: "",
       model: "",
       type: "",
-      size: "",
+      size: 0,
       color: "",
       releaseDate: "",
     },
@@ -226,7 +226,15 @@ const AddnewBikeModal = ({
                     <FormItem>
                       <FormLabel>Size (Engine CC)</FormLabel>
                       <FormControl>
-                        <Input placeholder="" {...field} />
+                        <Input
+                          type="number"
+                          placeholder="0"
+                          min={0}
+                          {...field}
+                          onChange={event =>
+                            field.onChange(+event.target.value)
+                          }
+                        />
                       </FormControl>
 
                       <FormMessage />

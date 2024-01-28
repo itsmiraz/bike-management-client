@@ -75,7 +75,7 @@ const SellBikeModal = ({
       {" "}
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button onClick={() => setOpen(true)} variant="outline">
+          <Button onClick={() => setOpen(true)} variant="secondary">
             Sell
           </Button>
         </DialogTrigger>

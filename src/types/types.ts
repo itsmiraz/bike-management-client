@@ -43,7 +43,7 @@ export type TBike = {
   brand: string;
   model: string;
   type: string;
-  size: string;
+  size: number;
   color: string;
   releaseDate: string;
 };
