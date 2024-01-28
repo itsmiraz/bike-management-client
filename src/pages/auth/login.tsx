@@ -43,9 +43,14 @@ const Login = () => {
       dispatch(setUser({ user: res.data.user, token: res.data.accessToken }));
       toast("Logged in SuccessFully");
       navigate("/");
-    } catch (err) {
+    } catch (err: any) {
       console.log(err);
-      toast("Logged in Failded");
+      toast(err?.data?.message || "Logged in Failed");
+      if (err?.data) {
+        toast.error(
+          err?.data?.errorSource.map((errSrc: any) => errSrc?.message)
+        );
+      }
     }
   }
   return (

@@ -43,9 +43,15 @@ const Register = () => {
       dispatch(setUser({ user: res.data.user, token: res.data.accessToken }));
       toast("Logged in SuccessFully");
       navigate("/");
-    } catch (err) {
+    } catch (err: any) {
       console.log(err);
-      toast("Logged in Failded");
+      toast(err?.data?.message || "Logged in Failed");
+      if (err?.data) {
+        toast.error(
+          err?.data?.errorSource.map((errSrc: any) => errSrc?.message)
+        );
+      }
+      // toast(err?.data.message || "Logged in Failded");
     }
   }
   return (
@@ -56,6 +62,7 @@ const Register = () => {
           className="w-24 absolute left-[50%] -translate-x-[50%] top-10 mx-auto"
           alt=""
         />
+
         <div className="max-w-[400px] bg-gray-100 shadow-lg w-full mx-auto border rounded-lg p-4">
           <h2 className="text-2xl font-semibold pb-2">Register</h2>
           <Separator />
