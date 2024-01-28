@@ -71,6 +71,17 @@ export const CCranges = [
   },
 ];
 
+export const Colors = [
+  "Red",
+  "Blue",
+  "Black",
+  "Orange",
+  "White",
+  "Green",
+  "Yellow",
+  "Grey",
+];
+
 export const TimelineType = [
   {
     label: "Weekly",
