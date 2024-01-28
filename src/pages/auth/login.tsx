@@ -101,7 +101,7 @@ const Login = () => {
 
           <p className="text-sm text-gray-600">
             Don't have any account Regiser{" "}
-            <Link to={"/register"}>
+            <Link to={"/auth/register"}>
               <span className="hover:underline">Here</span>
             </Link>
           </p>

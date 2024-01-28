@@ -1,7 +1,4 @@
-import { Link } from "react-router-dom";
-import { Button } from "../ui/button";
-import { useAppDispatch } from "@/redux/hooks/hooks";
-import { logOut } from "@/redux/feature/auth/authSlice";
+import { Link, useLocation } from "react-router-dom";
 const routes = [
   {
     path: "/bike-management",
@@ -18,14 +15,21 @@ const routes = [
 ];
 
 const Sidebar = () => {
-  const dispatch = useAppDispatch();
+  const location = useLocation();
 
   return (
-    <div className="p-4 h-screen flex flex-col justify-between">
+    <div className="py-6 h-screen flex flex-col justify-between">
       <div className="flex-1">
         <ul>
           {routes.map((route, i) => (
-            <li className="py-2 " key={i}>
+            <li
+              className={`p-2 font-medium ${
+                location.pathname === route.path
+                  ? "bg-gray-800 rounded text-white"
+                  : "bg-white"
+              }`}
+              key={i}
+            >
               <Link to={`${route.path}`}>
                 {" "}
                 <p>{route.label}</p>
@@ -34,10 +38,6 @@ const Sidebar = () => {
           ))}
         </ul>
       </div>
-      <div>
-        <Button onClick={() => dispatch(logOut())}>Log Out</Button>
-      </div>
-      <div className="mt-20 lg:hidden block"></div>
     </div>
   );
 };
