@@ -2,7 +2,7 @@ import App from "@/App";
 import Login from "@/pages/auth/login";
 import Register from "@/pages/auth/register";
 import BikeManagement from "@/pages/dashboard/bikeManagement/bikeManagement";
-import SalesHistory from "@/pages/dashboard/salesHistory";
+import SalesHistory from "@/pages/dashboard/salesHistory/salesHistory";
 import SalesManagement from "@/pages/dashboard/salesManagement/salesManagement";
 import { createBrowserRouter } from "react-router-dom";
 

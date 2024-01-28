@@ -10,7 +10,14 @@ const saleApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["bike"],
     }),
+    getHistory: builder.query({
+      query: query => ({
+        url: "/sale/sales-history",
+        method: "GET",
+        params: query,
+      }),
+    }),
   }),
 });
 
-export const { useCreateSaleMutation } = saleApi;
+export const { useCreateSaleMutation, useGetHistoryQuery } = saleApi;

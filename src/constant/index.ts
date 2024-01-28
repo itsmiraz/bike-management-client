@@ -20,3 +20,55 @@ export const Bike_Brands = [
   "KTM",
   "Other",
 ];
+
+export const CCranges = [
+  {
+    label: "0-150cc",
+    min: 0,
+    max: 150,
+  },
+  {
+    label: "150-250cc",
+    min: 150,
+    max: 250,
+  },
+  {
+    label: "250-450cc",
+    min: 250,
+    max: 450,
+  },
+  {
+    label: "450-650cc",
+    min: 450,
+    max: 650,
+  },
+  {
+    label: "650-850cc",
+    min: 650,
+    max: 850,
+  },
+  {
+    label: "850-1050cc",
+    min: 850,
+    max: 1050,
+  },
+];
+
+export const TimelineType = [
+  {
+    label: "Weekly",
+    value: "weekly",
+  },
+  {
+    label: "Daily",
+    value: "daily",
+  },
+  {
+    label: "Monthly",
+    value: "monthly",
+  },
+  {
+    label: "Yearly",
+    value: "yearly",
+  },
+];

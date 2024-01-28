@@ -52,3 +52,10 @@ export type TBikeInitState = {
   bikes: TBike[] | null;
 };
 // export const ErrorType =
+
+export type TSaleCard = {
+  buyerName: string;
+  productId: TBike;
+  date: Date;
+  quantity: number;
+};
