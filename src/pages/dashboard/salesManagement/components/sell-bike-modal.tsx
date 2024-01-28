@@ -22,6 +22,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+import { useCreateSaleMutation } from "@/redux/feature/sale/saleApi";
 import { TBike } from "@/types/types";
 import { SaleSchema } from "@/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -40,6 +41,8 @@ const SellBikeModal = ({
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   bikeDetails: TBike;
 }) => {
+  const [createSale] = useCreateSaleMutation();
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof SaleSchema>>({
     resolver: zodResolver(SaleSchema),
@@ -50,15 +53,21 @@ const SellBikeModal = ({
   });
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof SaleSchema>) {
-    console.log(values);
-    // try {
-    //   //   await addNewBike(values);
-    //   setOpen(false);
-    //   toast("SuccessFully Added");
-    //   form.reset();
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    try {
+      //   await addNewBike(values);
+
+      const payload = {
+        ...values,
+        productId: bikeDetails._id,
+      };
+      console.log(payload);
+      await createSale(payload);
+      setOpen(false);
+      toast("SuccessFully Sold");
+      form.reset();
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
