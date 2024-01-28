@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
 import {
   Dialog,
   DialogContent,
@@ -15,9 +16,17 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
 import { TBike } from "@/types/types";
-import { addNewBikeSchema } from "@/validation";
+import { SaleSchema } from "@/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -32,29 +41,24 @@ const SellBikeModal = ({
   bikeDetails: TBike;
 }) => {
   // 1. Define your form.
-  const form = useForm<z.infer<typeof addNewBikeSchema>>({
-    resolver: zodResolver(addNewBikeSchema),
+  const form = useForm<z.infer<typeof SaleSchema>>({
+    resolver: zodResolver(SaleSchema),
     defaultValues: {
-      name: "",
-      price: 0,
+      buyerName: "",
       quantity: 0,
-      brand: "",
-      model: "",
-      type: "",
-      color: "",
-      releaseDate: "",
     },
   });
   // 2. Define a submit handler.
-  async function onSubmit(values: z.infer<typeof addNewBikeSchema>) {
-    try {
-      //   await addNewBike(values);
-      setOpen(false);
-      toast("SuccessFully Added");
-      form.reset();
-    } catch (err) {
-      console.log(err);
-    }
+  async function onSubmit(values: z.infer<typeof SaleSchema>) {
+    console.log(values);
+    // try {
+    //   //   await addNewBike(values);
+    //   setOpen(false);
+    //   toast("SuccessFully Added");
+    //   form.reset();
+    // } catch (err) {
+    //   console.log(err);
+    // }
   }
 
   return (
@@ -78,55 +82,82 @@ const SellBikeModal = ({
               >
                 <FormField
                   control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Name</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Type the name of Bike" {...field} />
-                      </FormControl>
-
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="price"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Price</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="number"
-                          placeholder="0"
-                          {...field}
-                          onChange={event =>
-                            field.onChange(+event.target.value)
-                          }
-                        />
-                      </FormControl>
-
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
                   name="quantity"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Quantity</FormLabel>
+                      <FormLabel>
+                        Quantity To be Sold{" "}
+                        <span className="text-sm">
+                          ({bikeDetails.quantity} left)
+                        </span>
+                      </FormLabel>
                       <FormControl>
                         <Input
                           type="number"
                           placeholder="0"
+                          max={bikeDetails.quantity}
                           {...field}
                           onChange={event =>
                             field.onChange(+event.target.value)
                           }
                         />
                       </FormControl>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="buyerName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Name of Buyer</FormLabel>
+                      <FormControl>
+                        <Input type="text" placeholder="" {...field} />
+                      </FormControl>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="date"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col">
+                      <FormLabel>Date of birth</FormLabel>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <FormControl>
+                            <Button
+                              variant={"outline"}
+                              className={cn(
+                                "w-[240px] pl-3 text-left font-normal",
+                                !field.value && "text-muted-foreground"
+                              )}
+                            >
+                              {field.value ? (
+                                format(field.value, "PPP")
+                              ) : (
+                                <span>Pick a date</span>
+                              )}
+                              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                            </Button>
+                          </FormControl>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0" align="start">
+                          <Calendar
+                            mode="single"
+                            selected={field.value}
+                            onSelect={field.onChange}
+                            disabled={date =>
+                              date > new Date() || date < new Date("1900-01-01")
+                            }
+                            initialFocus
+                          />
+                        </PopoverContent>
+                      </Popover>
 
                       <FormMessage />
                     </FormItem>

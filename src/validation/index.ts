@@ -25,3 +25,11 @@ export const addNewBikeSchema = z.object({
   color: createStringSchema("Color").min(2).max(50),
   releaseDate: createStringSchema("Realease Date").min(2).max(50),
 });
+
+export const SaleSchema = z.object({
+  buyerName: z.string().min(2).max(50),
+  date: z.date({
+    required_error: "A date is required.",
+  }),
+  quantity: z.number().min(1),
+});
