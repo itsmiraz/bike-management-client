@@ -10,6 +10,7 @@ import Ellipsis from "@/assets/icons/ellipsis";
 import UpdateBikeModal from "./update-bike-details-modal";
 import { useState } from "react";
 import CreateVarient from "./createVarientModal";
+import ShowDetailsAbout from "./showDetails";
 
 const BikeCard = ({
   data,
@@ -38,13 +39,13 @@ const BikeCard = ({
   };
 
   return (
-    <div className="grid grid-cols-5 lg:grid-cols-6 base-normal justify-between border-b pb-4 ">
+    <div className="grid grid-cols-2 lg:grid-cols-6 base-normal justify-between border-b pb-4 ">
       <div className="flex justify-start items-center gap-x-4">
         <Checkbox onClick={() => handleSelect(data)} />
         <p>{data?.name}</p>
       </div>
-      <p className="text-center">{data.quantity}</p>
-      <p>{data.price} Tk</p>
+      <p className="text-center md:block hidden">{data.quantity}</p>
+      <p className="md:block hidden">{data.price} Tk</p>
       <p className="md:block hidden">{data.type} </p>
       <p className="md:block hidden">{data.color} </p>
       <div className="flex gap-x-4  justify-end">
@@ -64,6 +65,9 @@ const BikeCard = ({
                 open={open}
                 setOpen={setopen}
               />
+            </DropdownMenuLabel>
+            <DropdownMenuLabel>
+              <ShowDetailsAbout data={data} />
             </DropdownMenuLabel>
           </DropdownMenuContent>
         </DropdownMenu>

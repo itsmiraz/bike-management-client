@@ -206,15 +206,15 @@ const SalesManagement = () => {
               </>
             ) : (
               <>
-                <div className="grid text-sm font-semibold border-b pb-4 mb-4 grid-cols-6">
+                <div className="grid text-sm font-semibold border-b pb-4 mb-4 grid-cols-4 lg:grid-cols-6">
                   <div className="flex gap-2">
                     <p>#</p>
                     <p>Name</p>
                   </div>
                   <p className="text-center">Quantity</p>
                   <p>Price</p>
-                  <p className="lg:hidden block">Type</p>
-                  <p className="lg:hidden block">Color</p>
+                  <p className="lg:block hidden">Type</p>
+                  <p className="lg:block hidden">Color</p>
                   <p>Actions</p>
                 </div>
                 <div className="space-y-4 overflow-x-auto">

@@ -29,7 +29,7 @@ const SalesHistory = () => {
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Time line</SelectLabel>
-              {TimelineType.map((type, i) => (
+              {TimelineType?.map((type, i) => (
                 <SelectItem key={i} value={type.value}>
                   {type.label}
                 </SelectItem>

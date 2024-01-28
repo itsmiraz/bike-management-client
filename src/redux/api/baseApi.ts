@@ -8,9 +8,9 @@ import {
 } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
 import { logOut, setUser } from "../feature/auth/authSlice";
-
+// https://bike-management-server-six.vercel.app
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://bike-management-server-six.vercel.app/api",
+  baseUrl: "http://localhost:5000/api",
   credentials: "include",
 
   prepareHeaders: (headers, { getState }) => {
@@ -56,6 +56,6 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: baseQueryWithRefreshToken,
-  tagTypes: ["bike"],
+  tagTypes: ["bike", "history"],
   endpoints: () => ({}),
 });

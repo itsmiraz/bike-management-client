@@ -33,7 +33,9 @@ const ShowDetailsAbout = ({ data }: { data: TBike }) => {
             <p>Price : {data.price} TK</p>
           </div>
           <div>
-            <p>Quantity : {data.quantity}</p>
+            <p>
+              Quantity : {data.quantity === 0 ? "Stock Out" : data.quantity}
+            </p>
           </div>
           <div>
             <p>Color : {data.color}</p>

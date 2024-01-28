@@ -27,7 +27,7 @@ const RootLayout = () => {
             Open ? "left-0" : "-left-[300px]"
           } transition-all lg:left-0 ease-in-out  transform overflow-y-auto   bg-gray-200`}
         >
-          <Sidebar />
+          <Sidebar setOpen={setOpen} open={Open} />
         </div>
 
         <div className="col-span-5   lg:col-span-4 relative   p-5">

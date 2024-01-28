@@ -14,7 +14,13 @@ const routes = [
   },
 ];
 
-const Sidebar = () => {
+const Sidebar = ({
+  setOpen,
+  open,
+}: {
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const location = useLocation();
 
   return (
@@ -23,6 +29,7 @@ const Sidebar = () => {
         <ul>
           {routes.map((route, i) => (
             <li
+              onClick={() => setOpen(!open)}
               className={`p-2 font-medium ${
                 location.pathname === route.path
                   ? "bg-gray-800 rounded text-white"
