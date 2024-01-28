@@ -15,6 +15,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Bike_Brands, Types_of_bikes } from "@/constant";
 import { useAddNewBikeMutation } from "@/redux/feature/bike/bikeApi";
 import { addNewBikeSchema } from "@/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -40,6 +48,7 @@ const AddnewBikeModal = ({
       brand: "",
       model: "",
       type: "",
+      size: "",
       color: "",
       releaseDate: "",
     },
@@ -135,12 +144,31 @@ const AddnewBikeModal = ({
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Brand</FormLabel>
-                      <FormControl>
+
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select a brand " />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {Bike_Brands.map((brand, i) => (
+                            <SelectItem key={i} value={brand}>
+                              {brand}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+
+                      {/* <FormControl>
                         <Input
                           placeholder="Type the brand of Bike"
                           {...field}
                         />
-                      </FormControl>
+                      </FormControl> */}
 
                       <FormMessage />
                     </FormItem>
@@ -169,6 +197,39 @@ const AddnewBikeModal = ({
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Type</FormLabel>
+
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select a Type " />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {Types_of_bikes.map((type, i) => (
+                            <SelectItem key={i} value={type.value}>
+                              {type.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+
+                      {/* <FormControl>
+                        <Input placeholder="" {...field} />
+                      </FormControl> */}
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="size"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Size (Engine CC)</FormLabel>
                       <FormControl>
                         <Input placeholder="" {...field} />
                       </FormControl>

@@ -22,6 +22,7 @@ export const addNewBikeSchema = z.object({
   brand: createStringSchema("Brand").min(2).max(50),
   model: createStringSchema("Model").min(2).max(50),
   type: createStringSchema("Type").min(2).max(50),
+  size: createStringSchema("Size").min(2).max(50),
   color: createStringSchema("Color").min(2).max(50),
   releaseDate: createStringSchema("Realease Date").min(2).max(50),
 });

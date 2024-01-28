@@ -92,8 +92,8 @@ const SalesManagement = () => {
                 <SelectLabel>Type</SelectLabel>
                 <SelectItem value="-">All Types</SelectItem>
                 {Types_of_bikes.map((type, i) => (
-                  <SelectItem key={i} value={type}>
-                    {type}
+                  <SelectItem key={i} value={type.value}>
+                    {type.label}
                   </SelectItem>
                 ))}
               </SelectGroup>
