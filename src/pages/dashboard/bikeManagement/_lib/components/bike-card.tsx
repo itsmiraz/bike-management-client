@@ -34,7 +34,6 @@ const BikeCard = ({
     }
   };
 
-  console.log(SelectedBikes);
   return (
     <div className="flex base-normal justify-between border-b pb-4 ">
       <div className="flex justify-center items-center gap-x-4">

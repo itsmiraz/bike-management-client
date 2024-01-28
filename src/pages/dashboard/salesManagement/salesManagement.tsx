@@ -191,7 +191,7 @@ const SalesManagement = () => {
       </div>
       <hr />
       {/* Data */}
-      <div className="mt-6">
+      <div className="mt-4">
         {isLoading ? (
           <>
             <p>Loading</p>
@@ -206,6 +206,17 @@ const SalesManagement = () => {
               </>
             ) : (
               <>
+                <div className="grid text-sm font-semibold border-b pb-4 mb-4 grid-cols-6">
+                  <div className="flex gap-2">
+                    <p>#</p>
+                    <p>Name</p>
+                  </div>
+                  <p className="text-center">Quantity</p>
+                  <p>Price</p>
+                  <p>Type</p>
+                  <p>Color</p>
+                  <p>Actions</p>
+                </div>
                 <div className="space-y-4">
                   {data?.data?.data?.map((bike: TBike, i: number) => (
                     <SalesBikeCard key={i} i={i} data={bike} />
