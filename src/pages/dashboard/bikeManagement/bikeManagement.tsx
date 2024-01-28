@@ -8,6 +8,7 @@ import BikeCard from "./_lib/components/bike-card";
 import { TBike } from "@/types/types";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import LoadingAnimation from "@/components/ui/loadingAnimation";
 
 const BikeManagement = () => {
   const [open, setOpen] = useState(false);
@@ -34,6 +35,7 @@ const BikeManagement = () => {
     }
   };
 
+  const bikes = data?.data?.data;
   return (
     <div className="">
       <h1 className="h3-semibold">Bike Management</h1>
@@ -48,22 +50,34 @@ const BikeManagement = () => {
           Delete
         </Button>
       </div>
-      <div>
+      <div className="border-t pt-6">
         {isLoading ? (
           <>
-            <p>Loading</p>
+            <LoadingAnimation />
           </>
         ) : (
-          <div className="space-y-4">
-            {data?.data?.data?.map((bike: TBike, i: number) => (
-              <BikeCard
-                SelectedBikes={SelectedBikes}
-                setSelectedBikes={setSelectedBikes}
-                key={i}
-                data={bike}
-              />
-            ))}
-          </div>
+          <>
+            {bikes?.length === 0 ? (
+              <>
+                <p className="text-4xl font-bold text-center py-20 text-gray-700">
+                  Empty Inventory
+                </p>
+              </>
+            ) : (
+              <>
+                <div className="space-y-4">
+                  {bikes?.map((bike: TBike, i: number) => (
+                    <BikeCard
+                      SelectedBikes={SelectedBikes}
+                      setSelectedBikes={setSelectedBikes}
+                      key={i}
+                      data={bike}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+          </>
         )}
       </div>
     </div>

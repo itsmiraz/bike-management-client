@@ -15,6 +15,15 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Bike_Brands, Types_of_bikes } from "@/constant";
+import { getLastTenYears } from "@/libs/getLast10years";
 import { useUpdateBikeMutation } from "@/redux/feature/bike/bikeApi";
 import { TBike } from "@/types/types";
 import { addNewBikeSchema } from "@/validation";
@@ -43,6 +52,7 @@ const UpdateBikeModal = ({
       brand: defaultData.brand,
       model: defaultData.model,
       type: defaultData.type,
+      size: defaultData.size,
       color: defaultData.color,
       releaseDate: defaultData.releaseDate,
     },
@@ -63,6 +73,9 @@ const UpdateBikeModal = ({
       console.log(err);
     }
   }
+
+  const last10Years = getLastTenYears();
+
   return (
     <div className=" ">
       <Dialog open={open} onOpenChange={setOpen}>
@@ -104,6 +117,7 @@ const UpdateBikeModal = ({
                       <FormControl>
                         <Input
                           type="number"
+                          min={0}
                           placeholder="0"
                           {...field}
                           onChange={event =>
@@ -125,6 +139,7 @@ const UpdateBikeModal = ({
                       <FormControl>
                         <Input
                           type="number"
+                          min={0}
                           placeholder="0"
                           {...field}
                           onChange={event =>
@@ -143,12 +158,24 @@ const UpdateBikeModal = ({
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Brand</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Type the brand of Bike"
-                          {...field}
-                        />
-                      </FormControl>
+
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select a brand " />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {Bike_Brands.map((brand, i) => (
+                            <SelectItem key={i} value={brand}>
+                              {brand}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
 
                       <FormMessage />
                     </FormItem>
@@ -177,9 +204,23 @@ const UpdateBikeModal = ({
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Type</FormLabel>
-                      <FormControl>
-                        <Input placeholder="" {...field} />
-                      </FormControl>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select a Type " />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {Types_of_bikes.map((type, i) => (
+                            <SelectItem key={i} value={type.value}>
+                              {type.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
 
                       <FormMessage />
                     </FormItem>
@@ -205,9 +246,23 @@ const UpdateBikeModal = ({
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Release Date</FormLabel>
-                      <FormControl>
-                        <Input placeholder="" {...field} />
-                      </FormControl>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select a Year " />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {last10Years.map((year, i) => (
+                            <SelectItem key={i} value={year.toString()}>
+                              {year.toString()}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
 
                       <FormMessage />
                     </FormItem>

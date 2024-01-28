@@ -23,6 +23,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Bike_Brands, Types_of_bikes } from "@/constant";
+import { getLastTenYears } from "@/libs/getLast10years";
 import { useAddNewBikeMutation } from "@/redux/feature/bike/bikeApi";
 import { addNewBikeSchema } from "@/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -64,6 +65,9 @@ const AddnewBikeModal = ({
       console.log(err);
     }
   }
+
+  const last10Years = getLastTenYears();
+
   return (
     <div className=" ">
       <Dialog open={open} onOpenChange={setOpen}>
@@ -106,6 +110,7 @@ const AddnewBikeModal = ({
                         <Input
                           type="number"
                           placeholder="0"
+                          min={0}
                           {...field}
                           onChange={event =>
                             field.onChange(+event.target.value)
@@ -127,6 +132,7 @@ const AddnewBikeModal = ({
                         <Input
                           type="number"
                           placeholder="0"
+                          min={0}
                           {...field}
                           onChange={event =>
                             field.onChange(+event.target.value)
@@ -162,13 +168,6 @@ const AddnewBikeModal = ({
                           ))}
                         </SelectContent>
                       </Select>
-
-                      {/* <FormControl>
-                        <Input
-                          placeholder="Type the brand of Bike"
-                          {...field}
-                        />
-                      </FormControl> */}
 
                       <FormMessage />
                     </FormItem>
@@ -216,10 +215,6 @@ const AddnewBikeModal = ({
                         </SelectContent>
                       </Select>
 
-                      {/* <FormControl>
-                        <Input placeholder="" {...field} />
-                      </FormControl> */}
-
                       <FormMessage />
                     </FormItem>
                   )}
@@ -257,10 +252,25 @@ const AddnewBikeModal = ({
                   name="releaseDate"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Release Date</FormLabel>
-                      <FormControl>
-                        <Input placeholder="" {...field} />
-                      </FormControl>
+                      <FormLabel>Release Year</FormLabel>
+
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select a Year " />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {last10Years.map((year, i) => (
+                            <SelectItem key={i} value={year.toString()}>
+                              {year.toString()}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
 
                       <FormMessage />
                     </FormItem>
