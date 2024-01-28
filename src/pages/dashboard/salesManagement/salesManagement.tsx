@@ -213,11 +213,11 @@ const SalesManagement = () => {
                   </div>
                   <p className="text-center">Quantity</p>
                   <p>Price</p>
-                  <p>Type</p>
-                  <p>Color</p>
+                  <p className="lg:hidden block">Type</p>
+                  <p className="lg:hidden block">Color</p>
                   <p>Actions</p>
                 </div>
-                <div className="space-y-4">
+                <div className="space-y-4 overflow-x-auto">
                   {data?.data?.data?.map((bike: TBike, i: number) => (
                     <SalesBikeCard key={i} i={i} data={bike} />
                   ))}

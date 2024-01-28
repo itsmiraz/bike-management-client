@@ -1,13 +1,8 @@
 import { Link } from "react-router-dom";
-import logo from "@/assets/logo.png";
 import { Button } from "../ui/button";
 import { useAppDispatch } from "@/redux/hooks/hooks";
 import { logOut } from "@/redux/feature/auth/authSlice";
 const routes = [
-  {
-    path: "/",
-    label: "Dashboard",
-  },
   {
     path: "/bike-management",
     label: "Bike Management",
@@ -27,9 +22,6 @@ const Sidebar = () => {
 
   return (
     <div className="p-4 h-screen flex flex-col justify-between">
-      <div>
-        <img src={logo} className="w-20 pb-10" alt="" />
-      </div>
       <div className="flex-1">
         <ul>
           {routes.map((route, i) => (
@@ -45,6 +37,7 @@ const Sidebar = () => {
       <div>
         <Button onClick={() => dispatch(logOut())}>Log Out</Button>
       </div>
+      <div className="mt-20 lg:hidden block"></div>
     </div>
   );
 };

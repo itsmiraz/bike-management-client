@@ -18,6 +18,11 @@ export const Bike_Brands = [
   "Zontes",
   "Hero",
   "KTM",
+  "BMW",
+  "Ducati",
+  "Triumph",
+  "Harley-Davidson",
+  "Royal-Enfield",
   "Other",
 ];
 

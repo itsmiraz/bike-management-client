@@ -42,8 +42,8 @@ const BikeCard = ({
       </div>
       <p>{data.quantity}</p>
       <p>{data.price} Tk</p>
-      <p>{data.type} </p>
-      <p>{data.color} </p>
+      <p className="md:block hidden">{data.type} </p>
+      <p className="md:block hidden">{data.color} </p>
 
       <DropdownMenu>
         <DropdownMenuTrigger>
