@@ -15,13 +15,15 @@ const RootLayout = () => {
         <h2 className="text-center ">Bike Management</h2>
         <div></div>
       </div>
-      <div className="grid grid-cols-5 gap-5 min-h-screen">
+      <div className="grid  grid-cols-5 gap-5 min-h-screen">
         <div
-          className={`lg:relative z-50 absolute  ${
+          className={`lg:relative  z-50 absolute  ${
             Open ? "left-0" : "-left-[300px]"
-          } transition-all md:left-0 ease-in-out transform overflow-y-auto  col-span-4  lg:col-span-1 bg-gray-200`}
+          } transition-all lg:left-0 ease-in-out transform overflow-y-auto  col-span-4  lg:col-span-1 bg-gray-200`}
         >
-          <Sidebar />
+          <div className="sticky left top-20 w-full">
+            <Sidebar />
+          </div>
         </div>
 
         <div className="col-span-5  lg:col-span-4 relative   p-5">

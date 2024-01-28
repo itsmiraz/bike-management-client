@@ -12,6 +12,7 @@ import LoadingAnimation from "@/components/ui/loadingAnimation";
 
 const BikeManagement = () => {
   const [open, setOpen] = useState(false);
+
   const { data, isLoading } = useGetBikesQuery(undefined);
   const [SelectedBikes, setSelectedBikes] = useState<TBike[]>([]);
   const [deleteBike] = useDeleteBikeMutation();
@@ -68,6 +69,7 @@ const BikeManagement = () => {
                 <div className="space-y-4">
                   {bikes?.map((bike: TBike, i: number) => (
                     <BikeCard
+                      setAddNewBikeModal={setOpen}
                       SelectedBikes={SelectedBikes}
                       setSelectedBikes={setSelectedBikes}
                       key={i}

@@ -9,6 +9,7 @@ import {
 import Ellipsis from "@/assets/icons/ellipsis";
 import UpdateBikeModal from "./update-bike-details-modal";
 import { useState } from "react";
+import CreateVarient from "./createVarientModal";
 
 const BikeCard = ({
   data,
@@ -16,10 +17,12 @@ const BikeCard = ({
   SelectedBikes,
 }: {
   data: TBike;
+  setAddNewBikeModal: React.Dispatch<React.SetStateAction<boolean>>;
   SelectedBikes: TBike[];
   setSelectedBikes: React.Dispatch<React.SetStateAction<never[] | TBike[]>>;
 }) => {
   const [open, setopen] = useState(false);
+  const [createVarientModal, setcreateVarientModal] = useState(false);
 
   const handleSelect = (selectedBike: TBike) => {
     const isExits = SelectedBikes.find(bike => bike._id === selectedBike._id);
@@ -35,26 +38,36 @@ const BikeCard = ({
   };
 
   return (
-    <div className="flex base-normal justify-between border-b pb-4 ">
-      <div className="flex justify-center items-center gap-x-4">
+    <div className="grid grid-cols-5 lg:grid-cols-6 base-normal justify-between border-b pb-4 ">
+      <div className="flex justify-start items-center gap-x-4">
         <Checkbox onClick={() => handleSelect(data)} />
         <p>{data?.name}</p>
       </div>
-      <p>{data.quantity}</p>
+      <p className="text-center">{data.quantity}</p>
       <p>{data.price} Tk</p>
       <p className="md:block hidden">{data.type} </p>
       <p className="md:block hidden">{data.color} </p>
-
-      <DropdownMenu>
-        <DropdownMenuTrigger>
-          <Ellipsis />
-        </DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuLabel>
-            <UpdateBikeModal defaultData={data} open={open} setOpen={setopen} />
-          </DropdownMenuLabel>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <div className="flex gap-x-4  justify-end">
+        <CreateVarient
+          open={createVarientModal}
+          setOpen={setcreateVarientModal}
+          defaultData={data}
+        />
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <Ellipsis />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuLabel>
+              <UpdateBikeModal
+                defaultData={data}
+                open={open}
+                setOpen={setopen}
+              />
+            </DropdownMenuLabel>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
     </div>
   );
 };

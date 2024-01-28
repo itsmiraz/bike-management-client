@@ -4,7 +4,6 @@ const bikeApi = baseApi.injectEndpoints({
   endpoints: builder => ({
     getBikes: builder.query({
       query: query => {
-        console.log(query); // Log the query object
         return {
           url: `/bike`,
           params: query,
