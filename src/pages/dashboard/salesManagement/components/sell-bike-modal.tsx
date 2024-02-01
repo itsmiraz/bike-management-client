@@ -57,8 +57,8 @@ const SellBikeModal = ({
       //   await addNewBike(values);
 
       const payload = {
-        ...values,
-        productId: bikeDetails._id,
+        id: bikeDetails._id,
+        data: values,
       };
       console.log(payload);
       await createSale(payload);

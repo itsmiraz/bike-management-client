@@ -6,7 +6,7 @@ const SalesHistoryCard = ({ data, i }: { data: TSaleCard; i: number }) => {
   const day = date.getDate();
   const month = date.getMonth() + 1;
   const year = date.getFullYear();
-
+  console.log(data);
   const dateString = `${day}/${month}/${year}`;
   return (
     <div className="flex  base-normal items-center justify-between border-b py-4">
@@ -14,10 +14,10 @@ const SalesHistoryCard = ({ data, i }: { data: TSaleCard; i: number }) => {
         <p>{i + 1} .</p>
         <p>{data?.buyerName}</p>
       </div>
-      <p className="md:block hidden">{data?.productId?.name}</p>
+      <p className="md:block hidden">{data?.product?.name}</p>
       <p>{data?.quantity}</p>
       <p>{dateString}</p>
-      <ShowDetailsAbout data={data?.productId} />
+      <ShowDetailsAbout data={data?.product} />
     </div>
   );
 };

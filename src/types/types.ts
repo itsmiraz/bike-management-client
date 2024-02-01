@@ -55,7 +55,7 @@ export type TBikeInitState = {
 
 export type TSaleCard = {
   buyerName: string;
-  productId: TBike;
+  product: TBike;
   date: Date;
   quantity: number;
 };

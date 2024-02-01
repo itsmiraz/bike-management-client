@@ -4,9 +4,9 @@ const saleApi = baseApi.injectEndpoints({
   endpoints: builder => ({
     createSale: builder.mutation({
       query: paylaod => ({
-        url: "/sale/create-sale",
+        url: `/sale/create-sale/${paylaod.id}`,
         method: "POST",
-        body: paylaod,
+        body: paylaod.data,
       }),
       invalidatesTags: ["bike", "history"],
     }),

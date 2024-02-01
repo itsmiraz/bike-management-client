@@ -44,8 +44,8 @@ const ShowDetailsAbout = ({ data }: { data: TBike }) => {
             <p>Release Date : {data.releaseDate}</p>
           </div>
         </div>
-        <DialogClose>
-          <Button className="flex justify-end" type="submit">
+        <DialogClose asChild>
+          <Button className="flex  w-fit justify-end" type="submit">
             Close
           </Button>
         </DialogClose>

@@ -13,10 +13,10 @@ const SalesBikeCard = ({ data, i }: { data: TBike; i: number }) => {
 
         <p>{data?.name}</p>
       </div>
-      <p className="text-center">{data.quantity}</p>
-      <p>{data.price} Tk</p>
-      <p className="lg:block hidden">{data.type} </p>
-      <p className="lg:block hidden">{data.color} </p>
+      <p className="text-center">{data?.quantity}</p>
+      <p>{data?.price} Tk</p>
+      <p className="lg:block hidden">{data?.type} </p>
+      <p className="lg:block hidden">{data?.color} </p>
       <div className="flex gap-x-4">
         <SellBikeModal bikeDetails={data} open={open} setOpen={setOpen} />
         <ShowDetailsAbout data={data} />
